@@ -7,10 +7,17 @@
     (keyup.enter)="addItem(newItem.value); newItem.value = ''" 
     class="lg-text-input" 
     id="addItemInput" />
-  
-    <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+  <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+
+  <h2>
+    {{ items.length }}
+    <span *ngIf="items.length === 1; else elseBlock">Item</span>
+    <ng-template #elseBlock>Items</ng-template>
+  </h2>
 
   <ul>
-    <li *ngFor="let item of items">{{ item.description }}</li>
+    <li *ngFor="let i of items">
+      <app-item (remove)="remove(i)" [item]="i"></app-item>
+    </li>
   </ul>
 </div>
